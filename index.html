@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naqsh — Leave Your Mark.</title>
+<title>Naqsh: Leave Your Mark.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -60,8 +60,11 @@ body.pressing .cd{width:18px;height:18px;}
 /* ── NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 52px;transition:background .4s,backdrop-filter .4s,padding .4s;}
 nav.sc{background:rgba(12,12,14,.9);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.05);padding:14px 52px;}
-.n-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.n-wm{font-family:var(--fd);font-size:18px;color:var(--lime);letter-spacing:.1em;}
+.n-logo{display:flex;align-items:center;gap:0;text-decoration:none;}
+.n-logo-wave{flex-shrink:0;overflow:visible;margin-right:1px;}
+.n-ar-logo{font-size:19px;font-weight:700;color:var(--lime);letter-spacing:.02em;line-height:1;margin-right:7px;}
+.n-logo-sep{color:var(--lime);font-size:8px;opacity:.55;margin-right:7px;line-height:1;flex-shrink:0;}
+.n-wm{font-family:var(--fd);font-size:20px;color:var(--lime);letter-spacing:.06em;}
 .n-ar{font-size:13px;color:rgba(255,255,255,.4);margin-left:4px;}
 .n-links{display:flex;align-items:center;gap:28px;list-style:none;}
 .n-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;position:relative;}
@@ -361,7 +364,9 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
   .mkt-grid{grid-template-columns:1fr;}.mkt-div{display:none;}.mkt-blk{padding:32px 0;}
   .ft-inner{flex-direction:column;text-align:center;}.ft-links{justify-content:center;}
 }
+#dust-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;}
 </style>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.143.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.143.0/examples/jsm/"}}</script>
 </head>
 <body class="loading">
 
@@ -404,12 +409,14 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
 <!-- ══ NAV ════════════════════════════════════ -->
 <nav id="nav">
   <a href="#home" class="n-logo">
-    <svg width="34" height="34" viewBox="0 0 50 50" fill="none"><polygon points="25,2 48,25 25,48 2,25" stroke="#ccff00" stroke-width="1.5" fill="none"/><line x1="16" y1="17" x2="16" y2="33" stroke="#ccff00" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="17" x2="34" y2="33" stroke="#ccff00" stroke-width="2.5" stroke-linecap="round"/><line x1="34" y1="17" x2="34" y2="33" stroke="#ccff00" stroke-width="2.5" stroke-linecap="round"/></svg>
-    <span class="n-wm">NAQSH<span class="n-ar">نقش</span></span>
+    <svg id="logoWave" class="n-logo-wave" width="40" height="36" viewBox="-2 -4 58 52" fill="none"></svg>
+    <span class="n-ar-logo">نقش</span>
+    <span class="n-logo-sep">◆</span>
+    <span class="n-wm">Naqsh</span>
   </a>
   <ul class="n-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#work">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#packages">Packages</a></li>
     <li><a href="#markets">Markets</a></li>
   </ul>
@@ -418,13 +425,14 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
 
 <!-- ══ HERO ══════════════════════════════════ -->
 <section class="hero" id="home">
+  <canvas id="dust-canvas" aria-hidden="true"></canvas>
   <div class="h-bleed-text" aria-hidden="true">NAQSH</div>
   <div class="h-vignette"></div>
   <div class="h-in">
     <!-- eyebrow brand tag -->
     <div class="h-eyebrow">
       <svg width="13" height="13" viewBox="0 0 50 50" fill="none"><polygon points="25,2 48,25 25,48 2,25" stroke="#ccff00" stroke-width="2.5" fill="none"/><line x1="16" y1="17" x2="16" y2="33" stroke="#ccff00" stroke-width="3.5" stroke-linecap="round"/><line x1="16" y1="17" x2="34" y2="33" stroke="#ccff00" stroke-width="3.5" stroke-linecap="round"/><line x1="34" y1="17" x2="34" y2="33" stroke="#ccff00" stroke-width="3.5" stroke-linecap="round"/></svg>
-      <span>NAQSH &nbsp;·&nbsp; Digital Agency &nbsp;·&nbsp; UAE × Pakistan</span>
+      <span>NAQSH &nbsp;·&nbsp; Creative Agency &nbsp;·&nbsp; UAE &nbsp;·&nbsp; Pakistan</span>
     </div>
     <!-- main headline -->
     <h1 class="h-headline">We build digital presences<br>that <em class="h-lime">leave&nbsp;a&nbsp;mark.</em></h1>
@@ -572,16 +580,16 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
 
 <!-- ══ SERVICES ══════════════════════════════ -->
 <section class="services" id="services">
-  <div class="rv"><span class="sec-lbl">// 01 — What We Do</span><span class="sec-wm">SERVICES</span></div>
+  <div class="rv"><span class="sec-lbl">// 01 What We Do</span><span class="sec-wm">SERVICES</span></div>
   <h2 class="srv-heading rv d1">We make brands<br>impossible to ignore.</h2>
   <p class="srv-sub rv d2">Six core capabilities. One obsession: leave a mark so deep it cannot be erased.</p>
   <div class="srv-grid">
-    <div class="srv rv-s d1"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="srv-num">01</div><h3 class="srv-t">Website Development</h3><p class="srv-d">High-performance sites built to convert. Landing pages to full e-commerce — pixel-perfect and blazing fast.</p></div>
+    <div class="srv rv-s d1"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="srv-num">01</div><h3 class="srv-t">Website Development</h3><p class="srv-d">High-performance sites built to convert. Landing pages to full e-commerce, pixel-perfect and blazing fast.</p></div>
     <div class="srv rv-s d2"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg><div class="srv-num">02</div><h3 class="srv-t">Social Media Management</h3><p class="srv-d">Strategy, scheduling, engagement. We grow your audience across every platform and keep them coming back.</p></div>
     <div class="srv rv-s d3"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><div class="srv-num">03</div><h3 class="srv-t">Content Creation</h3><p class="srv-d">Original copy, graphics, and creative assets that speak your brand's language and command attention at a scroll.</p></div>
     <div class="srv rv-s d4"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><div class="srv-num">04</div><h3 class="srv-t">Video Editing &amp; Reels</h3><p class="srv-d">Scroll-stopping short-form video. Reels, TikToks, and brand films cut to captivate and maximise engagement.</p></div>
     <div class="srv rv-s d5"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><div class="srv-num">05</div><h3 class="srv-t">Product Mockups</h3><p class="srv-d">Photorealistic product visuals without the photoshoot cost. Packaging, apparel, and digital mockups that sell.</p></div>
-    <div class="srv rv-s d6"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div class="srv-num">06</div><h3 class="srv-t">WhatsApp Automation</h3><p class="srv-d">AI-powered bots handling inquiries, bookings, and follow-ups 24/7 — so you never miss a lead while you sleep.</p></div>
+    <div class="srv rv-s d6"><svg class="srv-icon" width="32" height="32" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div class="srv-num">06</div><h3 class="srv-t">WhatsApp Automation</h3><p class="srv-d">AI-powered bots handling inquiries, bookings, and follow-ups 24/7. Never miss a lead while you sleep.</p></div>
   </div>
 </section>
 
@@ -590,12 +598,12 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
   <div class="ab-ghost" aria-hidden="true">NAQSH</div>
   <div class="ab-grid">
     <div class="ab-l rv-l">
-      <span class="sec-lbl">// 02 — The Mark</span>
+      <span class="sec-lbl">// 02 The Mark</span>
       <h2 class="ab-heading">What makes<br>a mark?</h2>
     </div>
     <div class="ab-r">
-      <p class="ab-p rv d1"><em>Naqsh</em> (نقش) means <strong>"to engrave"</strong> — to leave an impression so deep it cannot be erased. That's the standard we hold every brand to.</p>
-      <p class="ab-p rv d2">We're a young, driven agency built by creators, coders, and strategists operating across <strong>UAE and Pakistan</strong>. Great digital work isn't just seen — it's <strong>felt.</strong></p>
+      <p class="ab-p rv d1"><em>Naqsh</em> (نقش) means <strong>"to engrave."</strong> To leave an impression so deep it cannot be erased. That's the standard we hold every brand to.</p>
+      <p class="ab-p rv d2">We're a young, driven agency founded and based in <strong>UAE</strong>, built by creators, coders, and strategists. Great digital work isn't just seen. It's <strong>felt.</strong></p>
       <p class="ab-p rv d3">Every service we deliver answers one question: <strong>how do we make your brand impossible to forget?</strong></p>
       <div class="ab-stats rv d4">
         <div><div class="stat-n" data-count="6">0</div><div class="stat-l">Services</div></div>
@@ -607,8 +615,8 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
 </section>
 
 <!-- ══ WORK ═══════════════════════════════════ -->
-<section class="work" id="work">
-  <div class="rv"><span class="sec-lbl">// 03 — Featured Work</span><span class="sec-wm">WORK</span></div>
+<section class="work" id="projects">
+  <div class="rv"><span class="sec-lbl">// 03 Featured Projects</span><span class="sec-wm">PROJECTS</span></div>
   <div class="work-tile rv d1">
     <div class="wt-vis">
       <div class="wt-screen"><div class="wts-bar"><i></i><i></i><i></i></div><div class="wts-body"><div class="wts-line"></div><div class="wts-line"></div><div class="wts-line"></div></div></div>
@@ -616,7 +624,7 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
     <div class="wt-info">
       <div class="wt-lbl">Featured Project</div>
       <div class="wt-title">Warehouse Arena</div>
-      <p class="wt-sub">Full digital presence — website, social strategy, and content built to dominate the market.</p>
+      <p class="wt-sub">Full digital presence: website, social strategy, and content built to dominate the market.</p>
       <div class="wt-tags"><span class="wt-tag">Web Dev</span><span class="wt-tag">Social Media</span><span class="wt-tag">Content</span></div>
       <a href="https://warehousearena.pk" class="wt-link" target="_blank" rel="noopener">View Live Site <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
@@ -625,7 +633,7 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
 
 <!-- ══ PACKAGES ═══════════════════════════════ -->
 <section class="packages" id="packages">
-  <div class="rv"><span class="sec-lbl">// 04 — How We Work</span><span class="sec-wm">PLANS</span></div>
+  <div class="rv"><span class="sec-lbl">// 04 How We Work</span><span class="sec-wm">PLANS</span></div>
   <h2 class="pkg-heading rv d1">Choose your level.</h2>
   <p class="pkg-sub rv d2">Every package is custom-built around your brand's goals. No cookie-cutter solutions, no wasted budget.</p>
   <div class="pkg-grid">
@@ -633,14 +641,14 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
     <div class="pkg rv d2"><div class="pkg-type">One-Time</div><div class="pkg-name">Standard Website</div><div class="pkg-div"></div><ul class="pkg-feats"><li><span class="fdot"></span>Multi-page site (5–8 pages)</li><li><span class="fdot"></span>Brand identity integration</li><li><span class="fdot"></span>CMS / admin panel</li><li><span class="fdot"></span>Performance optimization</li><li><span class="fdot"></span>1 month post-launch support</li></ul><a href="#contact" class="pkg-cta-g">Enquire Now</a></div>
     <div class="pkg rv d3"><div class="pkg-type">Monthly</div><div class="pkg-name">Starter Retainer</div><div class="pkg-div"></div><ul class="pkg-feats"><li><span class="fdot"></span>Social media management</li><li><span class="fdot"></span>12 posts per month</li><li><span class="fdot"></span>Basic content creation</li><li><span class="fdot"></span>Monthly performance report</li></ul><a href="#contact" class="pkg-cta-g">Enquire Now</a></div>
     <div class="pkg rv d4"><div class="pkg-type">Monthly</div><div class="pkg-name">Growth Retainer</div><div class="pkg-div"></div><ul class="pkg-feats"><li><span class="fdot"></span>Full social media management</li><li><span class="fdot"></span>24 posts + reels per month</li><li><span class="fdot"></span>Video editing included</li><li><span class="fdot"></span>Content strategy & planning</li><li><span class="fdot"></span>Community management</li></ul><a href="#contact" class="pkg-cta-g">Enquire Now</a></div>
-    <div class="pkg feat rv d5"><div class="pkg-type">Monthly — Full Suite</div><div class="pkg-name">Full Mark</div><div class="pkg-div"></div><ul class="pkg-feats"><li><span class="fdot"></span>Everything in Growth</li><li><span class="fdot"></span>WhatsApp automation bot</li><li><span class="fdot"></span>Product mockups monthly</li><li><span class="fdot"></span>Website maintenance</li><li><span class="fdot"></span>Paid ads management</li><li><span class="fdot"></span>Priority support 24/7</li></ul><a href="#contact" class="pkg-cta">Get the Full Mark →</a></div>
+    <div class="pkg feat rv d5"><div class="pkg-type">Monthly · Full Suite</div><div class="pkg-name">Full Mark</div><div class="pkg-div"></div><ul class="pkg-feats"><li><span class="fdot"></span>Everything in Growth</li><li><span class="fdot"></span>WhatsApp automation bot</li><li><span class="fdot"></span>Product mockups monthly</li><li><span class="fdot"></span>Website maintenance</li><li><span class="fdot"></span>Paid ads management</li><li><span class="fdot"></span>Priority support 24/7</li></ul><a href="#contact" class="pkg-cta">Get the Full Mark →</a></div>
   </div>
 </section>
 
 <!-- ══ MARKETS ════════════════════════════════ -->
 <section class="markets" id="markets">
   <div class="mkt-bg" aria-hidden="true">UAE × PK</div>
-  <div class="rv"><span class="sec-lbl">// 05 — Where We Are</span><h2 class="mkt-heading">Our Markets.</h2></div>
+  <div class="rv"><span class="sec-lbl">// 05 Where We Are</span><h2 class="mkt-heading">Our Markets.</h2></div>
   <div class="mkt-grid">
     <div class="mkt-blk rv-l">
       <div class="mkt-flag">🇦🇪</div><div class="mkt-rgn">United Arab Emirates</div><div class="mkt-cntry">Dubai · Abu Dhabi · Sharjah</div>
@@ -685,7 +693,11 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
   <div class="ft-bg" aria-hidden="true">NAQSH</div>
   <div class="ft-inner">
     <div class="ft-logo">
-      <svg width="24" height="24" viewBox="0 0 50 50" fill="none"><polygon points="25,2 48,25 25,48 2,25" stroke="#ccff00" stroke-width="1.5" fill="none"/><line x1="16" y1="17" x2="16" y2="33" stroke="#ccff00" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="17" x2="34" y2="33" stroke="#ccff00" stroke-width="2.5" stroke-linecap="round"/><line x1="34" y1="17" x2="34" y2="33" stroke="#ccff00" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <svg width="20" height="24" viewBox="0 0 40 50" fill="none">
+        <path d="M2,46 C8,34 6,24 14,16 C22,8 22,2 32,0" stroke="#ccff00" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.32"/>
+        <path d="M8,48 C14,36 12,26 20,18 C28,10 28,4 38,2" stroke="#ccff00" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.58"/>
+        <path d="M14,50 C20,38 18,28 26,20 C34,12 34,6 44,4" stroke="#ccff00" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.88"/>
+      </svg>
       <span class="ft-wm">NAQSH</span>
     </div>
     <div class="ft-meta">© 2024 Naqsh. All rights reserved.</div>
@@ -821,6 +833,40 @@ document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el => obs.observe(el)
   window.addEventListener('resize', scaleMonitor);
 })();
 
+// ══ LOGO WAVE — plume from ش (tapers right, fans left) ══
+(function(){
+  const svg = document.getElementById('logoWave');
+  if(!svg) return;
+  // All waves start in a tight cluster at x=W (right edge, adjacent to ش)
+  // and fan outward as they travel left — like a flowing plume or feather.
+  // Center wave = brightest spine, outer waves fade symmetrically.
+  const W=54, cy=22, numWaves=7, cycles=2, maxAmp=11;
+  const spacing=4.5;              // per-step y-spread at x=0 (full left)
+  const startFrac=0.08;           // tight cluster at x=W (8% of final spread)
+  const phaseSpread=0.22;         // subtle phase difference between waves
+  const opacities=[0.18,0.36,0.62,1.0, 0.62,0.36,0.18];
+  const widths   =[0.85,1.0, 1.2, 1.5, 1.2, 1.0, 0.85];
+  const steps=130;
+  let html='';
+  for(let w=0;w<numWaves;w++){
+    const idx=w-(numWaves-1)/2;        // -3 … +3
+    const yFinal=idx*spacing;          // y-offset at x=0 (full spread)
+    const yStart=yFinal*startFrac;     // y-offset at x=W (tight)
+    const phase=idx*phaseSpread;
+    let d='';
+    for(let i=0;i<=steps;i++){
+      const t=i/steps;
+      const x=(W*(1-t)).toFixed(2);
+      const amp=maxAmp*t*t;            // quadratic: slow at source, fast spread
+      const yBase=cy + yStart + (yFinal-yStart)*t;
+      const y=(yBase + amp*Math.sin(phase+2*Math.PI*cycles*t)).toFixed(2);
+      d+=(i===0?'M':'L')+x+','+y+' ';
+    }
+    html+=`<path d="${d.trim()}" stroke="#ccff00" stroke-width="${widths[w]}" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="${opacities[w]}"/>`;
+  }
+  svg.innerHTML=html;
+})();
+
 // ══ STAT COUNTERS ════════════════════════════
 document.querySelectorAll('[data-count]').forEach(el => {
   const co = new IntersectionObserver(entries => {
@@ -831,6 +877,153 @@ document.querySelectorAll('[data-count]').forEach(el => {
   },{threshold:.5});
   co.observe(el);
 });
+</script>
+
+<!-- ══ HERO COSMIC DUST ══════════════════════ -->
+<script type="module">
+import * as THREE from 'three'
+import { EffectComposer }        from 'three/addons/postprocessing/EffectComposer.js'
+import { RenderPass }            from 'three/addons/postprocessing/RenderPass.js'
+import { UnrealBloomPass }       from 'three/addons/postprocessing/UnrealBloomPass.js'
+import { ShaderPass }            from 'three/addons/postprocessing/ShaderPass.js'
+import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js'
+import { CopyShader }            from 'three/addons/shaders/CopyShader.js'
+
+function hexToVec3(hex){const n=parseInt(hex.slice(1),16);return new THREE.Vector3(((n>>16)&255)/255,((n>>8)&255)/255,(n&255)/255);}
+
+const LAYERS={NONE:0,TORUS_SCENE:1,BLOOM_SCENE:2,ENTIRE_SCENE:3}
+
+const canvas=document.getElementById('dust-canvas')
+const renderer=new THREE.WebGL1Renderer({canvas,antialias:false,alpha:false})
+const DPR=Math.min(window.devicePixelRatio,1.5)
+renderer.setPixelRatio(DPR)
+
+const scene=new THREE.Scene()
+scene.background=new THREE.Color(0x000000)
+scene.fog=new THREE.Fog(0x000000,0,22)
+
+const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,0.1,80)
+camera.position.set(0,0,3)
+camera.layers.enable(LAYERS.TORUS_SCENE)
+camera.layers.enable(LAYERS.BLOOM_SCENE)
+camera.layers.enable(LAYERS.ENTIRE_SCENE)
+scene.add(camera)
+
+const FinalPass={
+  uniforms:{
+    iTime:{value:0},tDiffuse:{value:null},torusTexture:{value:null},bloomTexture:{value:null},haloTexture:{value:null},
+    uBg:{value:hexToVec3('#0c0c0e')},uFlameA:{value:hexToVec3('#ccff00')},uFlameB:{value:hexToVec3('#99ff33')},uFlameAmt:{value:0.2}
+  },
+  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position,1.0);}`,
+  fragmentShader:`
+    uniform float iTime;uniform sampler2D tDiffuse,bloomTexture,torusTexture,haloTexture;
+    uniform vec3 uBg,uFlameA,uFlameB;uniform float uFlameAmt;varying vec2 vUv;
+    vec3 warp3d(vec3 pos,float t){float curv=.8,a=1.9,b=0.7;pos*=2.;
+      pos.x+=curv*sin(t+a*pos.y)+t*b;pos.y+=curv*cos(t+a*pos.x);
+      pos.y+=curv*sin(t+a*pos.z)+t*b;pos.z+=curv*cos(t+a*pos.y);
+      pos.z+=curv*sin(t+a*pos.x)+t*b;pos.x+=curv*cos(t+a*pos.z);
+      return 0.5+0.5*cos(pos.xyz+vec3(1,2,4));}
+    void main(){
+      vec2 uv=2.*vUv-1.;
+      vec3 w=pow(warp3d(vec3(uv.x,sin(uv.y),uv.y),iTime*1.5),vec3(1.5));
+      vec3 flame=1.5*uFlameA*w.x;flame*=w.y;flame+=uFlameB*w.z;
+      flame*=smoothstep(0.25,1.,abs(uv.y));
+      float md=smoothstep(-0.7,1.,-uv.y*uv.x);flame*=md*md;
+      vec3 bg=uBg*(1.0-0.4*length(uv));
+      vec3 halo=texture2D(haloTexture,vUv).xyz;
+      gl_FragColor=vec4(bg+flame*uFlameAmt+texture2D(bloomTexture,vUv).xyz+texture2D(torusTexture,vUv).xyz+texture2D(tDiffuse,vUv).xyz+halo,1.);}`
+}
+
+const renderPass=new RenderPass(scene,camera)
+
+const RES=new THREE.Vector2(Math.round(innerWidth*0.6),Math.round(innerHeight*0.6))
+
+const torusComposer=new EffectComposer(renderer)
+torusComposer.renderToScreen=false
+torusComposer.addPass(renderPass)
+torusComposer.addPass(new ShaderPass(GammaCorrectionShader))
+torusComposer.addPass(new UnrealBloomPass(RES,0.3,0.3,0))
+torusComposer.addPass(new ShaderPass(CopyShader))
+
+const bloomComposer=new EffectComposer(renderer)
+bloomComposer.renderToScreen=false
+bloomComposer.addPass(renderPass)
+bloomComposer.addPass(new UnrealBloomPass(RES,0.5,0.7,0))
+bloomComposer.addPass(new ShaderPass(GammaCorrectionShader))
+
+const finalPass=new ShaderPass(FinalPass)
+finalPass.uniforms.bloomTexture.value=bloomComposer.renderTarget1.texture
+finalPass.uniforms.torusTexture.value=torusComposer.renderTarget1.texture
+
+const finalComposer=new EffectComposer(renderer)
+finalComposer.addPass(renderPass)
+finalComposer.addPass(finalPass)
+
+const count=550,positions=[],sizes=[]
+for(let i=0;i<count;i++){positions.push(2*Math.random()-1,2*Math.random()-1,2*Math.random()-1);sizes.push(25+25*Math.random())}
+const geometry=new THREE.BufferGeometry()
+geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3))
+geometry.setAttribute('size',new THREE.Float32BufferAttribute(sizes,1))
+
+const uniforms={
+  iTime:{value:0},iShift:{value:new THREE.Vector3()},iAlpha:{value:0},iAnimation:{value:new THREE.Vector3()},
+  iResolution:{value:{x:innerWidth*devicePixelRatio,y:innerHeight*devicePixelRatio}},
+  uDepth:{value:3.7},uCool:{value:hexToVec3('#2d5200')},uWarm:{value:hexToVec3('#ccff00')}
+}
+
+const mat=new THREE.ShaderMaterial({uniforms,transparent:true,
+  vertexShader:`
+    attribute float size;uniform float iTime;uniform vec3 iShift,iAnimation;uniform vec2 iResolution;uniform float uDepth;
+    varying float transparency,warmness;
+    vec3 warp3d(vec3 pos,float t){float curv=0.9,a=1.9,b=0.25,b2=0.03,c=0.02;pos*=2.;
+      pos.x+=curv*sin(c*t+a*pos.y)+t*b2;pos.y+=curv*cos(c*t+a*pos.x);
+      pos.z+=curv*cos(c*t+a*pos.y);pos.z+=curv*sin(c*t+a*pos.x)+t*b;pos.z=abs(pos.z);return pos.xyz;}
+    void main(){vec3 v=warp3d(position,iTime);v=uDepth*(2.*fract(v+iShift)-1.)+iAnimation;
+      vec4 vpos=modelViewMatrix*vec4(v,1.);transparency=step(length(v),uDepth);
+      warmness=step(.75,fract(size*7.13));gl_PointSize=size*iResolution.y/1000./-vpos.z;gl_Position=projectionMatrix*vpos;}`,
+  fragmentShader:`
+    varying float transparency,warmness;uniform float iAlpha;uniform vec3 uCool,uWarm;
+    void main(){vec3 color=mix(uCool*.8,uWarm*.8,warmness);float tex=smoothstep(1.,.3,length(2.*gl_PointCoord-1.));
+      gl_FragColor=vec4(tex*color,tex*transparency*iAlpha);}`
+})
+mat.stencil=false
+
+const points=new THREE.Points(geometry,mat)
+points.position.set(0,0,-1)
+points.layers.enable(LAYERS.ENTIRE_SCENE)
+scene.add(points)
+
+function onResize(){
+  const w=innerWidth,h=innerHeight
+  renderer.setPixelRatio(DPR);renderer.setSize(w,h,false)
+  camera.aspect=w/h;camera.updateProjectionMatrix()
+  for(const c of[torusComposer,bloomComposer,finalComposer]){c.setPixelRatio(DPR);c.setSize(w,h)}
+  uniforms.iResolution.value={x:w*DPR,y:h*DPR}
+}
+window.addEventListener('resize',onResize)
+onResize()
+
+const fadeStart=performance.now()
+;(function appearIn(){
+  const t=Math.min((performance.now()-fadeStart)/2200,1)
+  const e=t*t*t*(t*(t*6-15)+10)
+  uniforms.iAlpha.value=e*0.68
+  if(t<1)requestAnimationFrame(appearIn)
+})()
+
+let _lastFrame=0
+;(function animate(now){
+  requestAnimationFrame(animate)
+  if(now-_lastFrame<32)return   // cap at ~30fps
+  _lastFrame=now
+  const t=now/1000
+  finalPass.uniforms.iTime.value=t
+  uniforms.iTime.value=t
+  uniforms.iShift.value.add(camera.position.clone().multiplyScalar(0.0022*0.4))
+  camera.layers.set(LAYERS.TORUS_SCENE);torusComposer.render()
+  camera.layers.set(LAYERS.BLOOM_SCENE);bloomComposer.render()
+  camera.layers.set(LAYERS.ENTIRE_SCENE);finalComposer.render()
+})(0)
 </script>
 </body>
 </html>
