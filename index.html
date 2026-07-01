@@ -161,6 +161,7 @@ body.menu-open .m-menu{opacity:1;pointer-events:auto;transform:translateY(0);}
 /* Glass glare */
 .hm-glare{position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 24%,rgba(255,255,255,0) 78%,rgba(255,255,255,.03) 100%);z-index:40;}
 /* Stand */
+.hm-mobile-video{display:none;}
 .hm-neck{width:120px;height:74px;margin-top:-2px;background:linear-gradient(100deg,#2a2c26 0%,#15170f 60%,#0e0f0c 100%);clip-path:polygon(28% 0,72% 0,84% 100%,16% 100%);}
 .hm-foot{width:340px;height:16px;border-radius:0 0 14px 14px;background:linear-gradient(180deg,#2a2c26,#101108);box-shadow:0 20px 40px -14px rgba(0,0,0,.8);}
 .hm-shadow{width:300px;height:14px;border-radius:50%;margin-top:6px;background:radial-gradient(ellipse at center,rgba(0,0,0,.55),rgba(0,0,0,0) 72%);filter:blur(4px);}
@@ -362,9 +363,11 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
   .h-in{padding:64px 18px 16px;gap:8px;}
   .h-acts{flex-wrap:wrap;justify-content:center;}
   .h-device{width:90vw!important;}
-  .h-mid{margin-top:28px;}
-  .hm-proj-tiles{justify-content:center;}
-  .hm-tile-col:nth-child(2),.hm-tile-col:nth-child(3){display:none;}
+  .h-mid{margin-top:16px;}
+  .hm-wrap::before{display:none;}
+  .hm-bezel,.hm-neck,.hm-foot,.hm-shadow,.hm-glow{display:none;}
+  .hm-mobile-video{display:block;width:100%;max-width:380px;margin:0 auto;aspect-ratio:9/16;object-fit:cover;border-radius:14px;background:#0a0a0c;box-shadow:0 20px 50px rgba(0,0,0,.5);}
+  .h-acts{margin-top:24px;}
 .services,.about,.work,.packages,.markets,.cta-sec{padding:56px 18px;}
   footer{padding:32px 18px 24px;}
   .srv-heading,.pkg-heading{margin-bottom:10px;}
@@ -462,6 +465,8 @@ footer{background:var(--dark1);border-top:1px solid rgba(255,255,255,.05);paddin
     <h1 class="h-headline"><span class="hw"><span class="hwi">We</span></span><span class="hw"><span class="hwi">build</span></span><span class="hw"><span class="hwi">digital</span></span><span class="hw"><span class="hwi">presences</span></span><br><span class="hw"><span class="hwi">that</span></span><em class="h-lime"><span class="hwi" id="lime-mark">leave&nbsp;a&nbsp;mark.</span></em></h1>
     <div class="h-mid">
       <div class="hm-wrap" id="hmScaleWrap">
+        <!-- mobile: bare video, no frame -->
+        <video class="hm-mobile-video" id="hm-reel-1-mobile" muted autoplay playsinline></video>
         <!-- ambient glow -->
         <div class="hm-glow" aria-hidden="true"></div>
         <!-- bezel -->
@@ -794,6 +799,11 @@ document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el => obs.observe(el)
   const wrap = document.getElementById('hmScaleWrap');
   if (!wrap) return;
   function scaleMonitor() {
+    if (window.innerWidth <= 768) {
+      wrap.style.transform = '';
+      wrap.style.marginBottom = '';
+      return;
+    }
     const avail = window.innerWidth - 48;
     const s = Math.min(1, avail / 932);
     wrap.style.transform = 'scale(' + s + ')';
@@ -811,6 +821,7 @@ document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el => obs.observe(el)
     'hm-reel-2': ['reel4.mp4', 'reel5.mp4', 'reel6.mp4'],
     'hm-reel-3': ['reel8.mp4', 'reel9.mp4']
   };
+  playlists['hm-reel-1-mobile'] = playlists['hm-reel-1'];
   Object.keys(playlists).forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
